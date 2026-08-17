@@ -1,7 +1,7 @@
 const GITHUB_USERNAME = 'justo340';
 const PROJECT_LIMIT = 6;
-const projectGrid = document.getElementById('project-grid');
-const projectStatus = document.getElementById('projects-status');
+let projectGrid;
+let projectStatus;
 
 const languageColors = {
   JavaScript: '#f0b93a',
@@ -116,6 +116,14 @@ function renderEmptyState(message) {
 }
 
 async function loadProjects() {
+  projectGrid = document.getElementById('project-grid');
+  projectStatus = document.getElementById('projects-status');
+
+  if (!projectGrid || !projectStatus) {
+    console.error('The project section could not be found.');
+    return;
+  }
+
   try {
     const search = new URLSearchParams({
       sort: 'updated',
