@@ -14,12 +14,12 @@ function loadPartials() {
   });
 }
 
-try {
-  loadPartials();
-  Promise.resolve().then(() => {
+document.addEventListener('DOMContentLoaded', () => {
+  try {
+    loadPartials();
     document.dispatchEvent(new Event('partialsloaded'));
-  });
-}
-catch (error) {
-  console.error('Unable to load page content:', error);
-}
+  }
+  catch (error) {
+    console.error('Unable to load page content:', error);
+  }
+});
