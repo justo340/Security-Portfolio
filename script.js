@@ -24,4 +24,4 @@ function initializeSite() {
   }
 }
 
-document.addEventListener('partialsloaded', initializeSite, { once: true });
+document.addEventListener('DOMContentLoaded', initializeSite, { once: true });

@@ -1,7 +1,46 @@
 const GITHUB_USERNAME = 'justo340';
 const PROJECT_LIMIT = 6;
-const projectGrid = document.getElementById('project-grid');
-const projectStatus = document.getElementById('projects-status');
+let projectGrid;
+let projectStatus;
+
+const fallbackProjects = [
+  {
+    name: 'ukulimaBora',
+    html_url: 'https://github.com/justo340/ukulimaBora',
+    language: 'PROJECT',
+    updated_at: '2026-08-09T19:52:50Z',
+  },
+  {
+    name: 'File-Sync',
+    html_url: 'https://github.com/justo340/File-Sync',
+    language: 'PROJECT',
+    updated_at: '2025-01-19T22:27:38Z',
+  },
+  {
+    name: 'racecar-CTF',
+    html_url: 'https://github.com/justo340/racecar-CTF',
+    language: 'PROJECT',
+    updated_at: '2024-04-10T16:15:39Z',
+  },
+  {
+    name: 'Simple-Encryptor-CTF',
+    html_url: 'https://github.com/justo340/Simple-Encryptor-CTF',
+    language: 'PROJECT',
+    updated_at: '2024-04-04T14:37:17Z',
+  },
+  {
+    name: 'RSA-Factoring-Challenge',
+    html_url: 'https://github.com/justo340/RSA-Factoring-Challenge',
+    language: 'PROJECT',
+    updated_at: '2023-01-24T10:04:32Z',
+  },
+  {
+    name: 'binary_trees',
+    html_url: 'https://github.com/justo340/binary_trees',
+    language: 'PROJECT',
+    updated_at: '2023-03-02T10:09:47Z',
+  },
+];
 
 const languageColors = {
   JavaScript: '#f0b93a',
@@ -115,7 +154,22 @@ function renderEmptyState(message) {
   projectGrid.append(card);
 }
 
+function renderProjects(projects) {
+  projectGrid.replaceChildren(...projects.map(makeProjectCard));
+  const label = projects.length === 1 ? 'project' : 'projects';
+
+  projectStatus.textContent = `${projects.length} recent public GitHub ${label} loaded.`;
+}
+
 async function loadProjects() {
+  projectGrid = document.getElementById('project-grid');
+  projectStatus = document.getElementById('projects-status');
+
+  if (!projectGrid || !projectStatus) {
+    console.error('The project section could not be found.');
+    return;
+  }
+
   try {
     const search = new URLSearchParams({
       sort: 'updated',
@@ -145,20 +199,15 @@ async function loadProjects() {
       renderEmptyState(message);
       return;
     }
-    projectGrid.replaceChildren(...projects.map(makeProjectCard));
-    const label = projects.length === 1 ? 'project' : 'projects';
-
-    projectStatus.textContent = `${projects.length} recent public GitHub ${label} loaded.`;
+    renderProjects(projects);
   } catch (error) {
-    projectStatus.textContent = 'GitHub projects are temporarily unavailable.';
-    const message = [
-      'This page could not reach GitHub right now.',
-      'Refresh to try again, or visit my GitHub profile directly.',
+    renderProjects(fallbackProjects);
+    projectStatus.textContent = [
+      'Showing a saved selection of public GitHub projects.',
+      'Connect to GitHub to load the newest updates.',
     ].join(' ');
-
-    renderEmptyState(message);
     console.error('Unable to load GitHub projects:', error);
   }
 }
 
-document.addEventListener('partialsloaded', loadProjects, { once: true });
+document.addEventListener('DOMContentLoaded', loadProjects, { once: true });
