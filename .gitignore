@@ -1,0 +1,9 @@
+# OS/editor files
+.DS_Store
+Thumbs.db
+.vscode/
+
+# Local document rendering QA
+# submission/qa/
+# submission/build_submission.py
+# submission/security_Portfolio_Submission.docx
