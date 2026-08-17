@@ -4,6 +4,51 @@ A responsive, recruiter-ready homepage for a growing cybersecurity body of work.
 
 The project section is dynamic: it requests the latest public, non-forked, non-archived repositories from the configured GitHub profile and turns them into portfolio cards. It is currently configured for `justo340`; change `GITHUB_USERNAME` in `projects.js` if needed.
 
+## Project structure
+
+The page is split into small, readable HTML partials. Edit the relevant file
+instead of searching through one large `index.html` file:
+
+```text
+index.html          Page shell and file references
+partials/
+  header.html       Navigation
+  hero.html         Introductory section
+  work.html         GitHub projects section
+  skills.html       Skills section
+  certifications.html  Certifications section
+  profile.html      Profile photo section
+  about.html        About section
+  footer.html       Footer
+styles.css          Site styles
+partials.js         Loads the HTML partials
+components.js       Generated browser-friendly partial content
+build-components.ps1  Rebuilds components.js after partial edits
+script.js           Navigation and footer behaviour
+projects.js         GitHub project cards
+```
+
+You can open `index.html` directly in a browser. The page uses
+`components.js`, generated from the readable files in `partials/`, so it also
+works without a local web server.
+
+After editing an HTML file in `partials/`, rebuild `components.js` with:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\build-components.ps1
+```
+
+Then refresh the browser page.
+
+On Windows, you can also start the included local server with:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\serve.ps1
+```
+
+Then open `http://localhost:8080` in your browser. Press `Ctrl+C` in the
+PowerShell window when you are done previewing the site.
+
 ## Personalize before publishing
 
 Use Find/Replace in the project for these values:
