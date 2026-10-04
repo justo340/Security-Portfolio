@@ -515,9 +515,13 @@ h1 em {
     margin-top: 3rem;
 }
 
+.credential-cta {
+    margin-top: .65rem;
+}
+
 .certification-card {
     position: relative;
-    min-height: 260px;
+    min-height: 220px;
     padding: 1.35rem;
     border: 1px solid var(--line);
     background: #f9f8f3;
@@ -533,12 +537,6 @@ h1 em {
 .certification-card > p:not(.overline) {
     color: var(--muted);
     font-size: .88rem;
-}
-
-.certification-card .text-link {
-    position: absolute;
-    bottom: 1.35rem;
-    left: 1.35rem;
 }
 
 .certification-number {
@@ -678,14 +676,9 @@ h1 em {
     line-height: 1.7;
 }
 
-.profile-note {
-    margin-top: 1.5rem;
-    font-size: .85rem;
-}
-
-.profile-note code {
-    color: var(--ink);
-    font: .75rem var(--mono);
+.profile-link {
+    display: inline-block;
+    margin-top: .75rem;
 }
 
 .about-statement h2 {
